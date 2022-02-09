@@ -1,0 +1,27 @@
+type LoanProvider = 
+ service {
+   addOffer: (nat, float64) -> () oneway;
+   addRequest: (LoanOfferRequest) -> () oneway;
+   getName: () -> (opt text) query;
+   getOffers: () -> (vec LoanOffer) query;
+   getRequests: () -> (vec LoanOfferRequest) query;
+   init: (text) -> () oneway;
+ };
+type LoanOfferRequest = 
+ record {
+   amount: float64;
+   applicationid: nat;
+   created: int;
+   rating: nat16;
+   term: nat16;
+   zipcode: text;
+ };
+type LoanOffer = 
+ record {
+   applicationid: nat;
+   apr: float64;
+   created: int;
+   providerid: principal;
+   providername: text;
+ };
+service : () -> LoanProvider

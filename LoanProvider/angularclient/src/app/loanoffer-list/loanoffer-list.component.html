@@ -1,0 +1,20 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" style="text-align: right;">Application Id</th>
+            <th scope="col" style="text-align: right;">APR</th>
+            <th scope="col" style="text-align: right;">Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let offer of offers">
+            <td style="text-align: right;">{{ offer.applicationId }}</td>
+            <td style="text-align: right;">{{ offer.apr/100 |  percent:'1.2'}}</td>    
+            <td style="text-align: right;">{{ offer.created/1000000 | date:'short'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

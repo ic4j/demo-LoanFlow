@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.ic4j.demos.loanflow.loanclient.MainActivity">
+    <item
+        android:id="@+id/action_applications"
+        android:orderInCategory="100"
+        android:title="@string/action_applications"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_offers"
+        android:orderInCategory="100"
+        android:title="Offers"
+        app:showAsAction="never" />
+</menu>

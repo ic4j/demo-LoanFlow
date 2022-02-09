@@ -1,0 +1,29 @@
+<div class="card my-5">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #responseForm="ngForm">
+        <div class="form-group">
+          <label for="applicationId">Application Id</label>
+          <input type="text" [(ngModel)]="response.applicationId" 
+            class="form-control" 
+            id="applicationId" 
+            name="applicationId" 
+            placeholder="Enter Application Id"
+            required #applicationId="ngModel"
+            >
+          <div [hidden]="!applicationId.pristine" class="alert alert-danger">Application Id is required</div>
+        </div>
+        <div class="form-group">
+          <label for="apr">Loan APR</label>
+          <input type="number" [(ngModel)]="response.apr" 
+            class="form-control" 
+            id="apr" 
+            name="apr" 
+            placeholder="Enter Loan APR"
+            required #apr="ngModel">
+          <div [hidden]="!apr.pristine" class="alert alert-danger">APR is required</div>
+        </div>        
+        <button type="submit" [disabled]="!responseForm.form.valid" 
+          class="btn btn-info">Submit</button>
+      </form>
+    </div>
+  </div>

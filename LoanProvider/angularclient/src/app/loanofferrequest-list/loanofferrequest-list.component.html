@@ -1,0 +1,26 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" style="text-align: right;">Application Id</th>
+            <th scope="col" style="text-align: right;">Amount</th>
+            <th scope="col" style="text-align: right;">Term</th>
+            <th scope="col" style="text-align: right;">Rating</th>
+            <th scope="col" style="text-align: right;">Zipcode</th>
+            <th scope="col" style="text-align: right;">Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of requests">
+            <td style="text-align: right;">{{ request.applicationId }}</td>
+            <td style="text-align: right;">{{ request.amount | currency:'USD'}}</td>    
+            <td style="text-align: right;">{{ request.term}} Months</td> 
+            <td style="text-align: right;">{{ request.rating}}</td> 
+            <td style="text-align: right;">{{ request.zipcode}}</td> 
+            <td style="text-align: right;">{{ request.created/1000000 | date:'short'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

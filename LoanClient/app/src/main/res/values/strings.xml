@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">LoanClient</string>
+    <string name="action_applications">Applications</string>
+    <string name="action_offers">Offers</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="applications_fragment_label">Loan Applications</string>
+    <string name="offers_fragment_label">Loan Offers</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="ic.location">http://10.0.2.2:8000</string>
+    <string name="ic.canister">ryjl3-tyaaa-aaaaa-aaaba-cai</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="apply_fragment_label">Apply For Loan</string>
+    <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="ssn">SSN</string>
+    <string name="amount">Loan Amount</string>
+    <string name="term">Loan Term</string>
+
+    <string-array name="term">
+        <item>24</item>
+        <item>48</item>
+        <item>72</item>
+    </string-array>
+</resources>

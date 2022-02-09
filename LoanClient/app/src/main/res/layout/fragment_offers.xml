@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TableLayout
+                android:theme="@style/Theme.LoanClient.TableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/table_layout">
+                <TableRow
+                    android:theme="@style/Theme.LoanClient.TableRow"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/table_row">
+
+                    <TextView
+                        android:id="@+id/id"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Id"/>
+
+                    <TextView
+                        android:id="@+id/apr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="APR"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:id="@+id/created"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Created"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000" />
+
+                </TableRow>
+            </TableLayout>
+            // add a listview to display our table records
+            <ListView
+                android:id="@+id/offers_view"
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

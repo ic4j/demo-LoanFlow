@@ -1,0 +1,18 @@
+type CreditRequest = 
+ record {
+   created: int;
+   firstname: text;
+   lastname: text;
+   ssn: text;
+   userid: principal;
+   zipcode: text;
+ };
+type CreditCheck = 
+ service {
+   addRequest: (CreditRequest) -> () oneway;
+   getName: () -> (opt text) query;
+   getRequests: () -> (vec CreditRequest) query;
+   init: (text) -> () oneway;
+   setCredit: (principal, nat16) -> () oneway;
+ };
+service : () -> CreditCheck
