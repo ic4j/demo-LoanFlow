@@ -1,7 +1,7 @@
 import Principal "mo:base/Principal";
+import Buffer "mo:base/Buffer";
 import Option "mo:base/Option";
 import Time "mo:base/Time";
-import Array "mo:base/Array";
 import LoanBroker "canister:LoanBroker";
 
 actor class LoanProvider() = this {
@@ -9,12 +9,13 @@ actor class LoanProvider() = this {
     type LoanOfferRequest = LoanBroker.LoanOfferRequest;
     type LoanOffer = LoanBroker.LoanOffer;
 
-    var requests : [LoanOfferRequest] = [];
-    var offers : [LoanOffer] = [];
+    var requests : Buffer.Buffer<LoanOfferRequest> = Buffer.Buffer(0);
+    var offers : Buffer.Buffer<LoanOffer> = Buffer.Buffer(0);
 
     public shared (msg) func init(input : Text) {
         name := Option.make(input);
-        requests := [];
+        requests := Buffer.Buffer(0);
+        offers := Buffer.Buffer(0);
         LoanBroker.addProvider(this);
     };
 
@@ -23,7 +24,7 @@ actor class LoanProvider() = this {
     };    
 
     public func addRequest(request : LoanOfferRequest){
-        requests := Array.append(requests, [request]);
+        requests.add(request);
     };
 
     public shared (msg) func addOffer(applicationId : Nat, apr : Float){
@@ -35,16 +36,16 @@ actor class LoanProvider() = this {
             created = Time.now();
         };
 
-        offers := Array.append(offers, [offer]);
+        offers.add(offer);
         LoanBroker.addOffer(Principal.fromActor(this),offer);
     };  
 
     public shared query (msg) func getRequests() : async [LoanOfferRequest] {
-        return requests;
+        return requests.toArray();
     }; 
 
     public shared query (msg) func getOffers() : async [LoanOffer] {
-        return offers;
+        return offers.toArray();
     };    
 
 };

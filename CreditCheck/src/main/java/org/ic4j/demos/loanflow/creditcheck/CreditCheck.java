@@ -21,7 +21,7 @@ public class CreditCheck {
 	static String PROPERTIES_FILE_NAME = "application.properties";
 	static Short DEFAULT_RATING = 500;
 
-    static Logger LOG = LoggerFactory.getLogger(CreditCheck .class);; 
+    static Logger LOG = LoggerFactory.getLogger(CreditCheck .class);
 	static String urlConnection = "jdbc:derby:dfinity;create=true";
 	static Connection connection;
 
@@ -76,6 +76,7 @@ public class CreditCheck {
 			
 			for(CreditRequest request : requests)
 			{
+				LOG.info("Processing credit request for user " + request.userId +  " with SSN " + request.ssn);
 				statement.setString(1, request.ssn);
 				ResultSet result = statement.executeQuery();
 
@@ -85,11 +86,16 @@ public class CreditCheck {
 
 					creditService.setCredit(request.userId, rating);
 					found = true;
+
+					LOG.info("Rating is set to " + rating);
 				}
 
 				// set default rating if not found
 				if(!found)
+				{
 					creditService.setCredit(request.userId, DEFAULT_RATING);
+					LOG.info("Rating is set to " + DEFAULT_RATING);
+				}
 			}
 			statement.closeOnCompletion();
 		} catch (Exception e) {

@@ -1,10 +1,10 @@
 import Principal "mo:base/Principal";
 import Option "mo:base/Option";
+import Buffer "mo:base/Buffer";
 import None "mo:base/None";
 import Time "mo:base/Time";
 import Map "mo:base/HashMap";
 import Hash "mo:base/Hash";
-import Array "mo:base/Array";
 import Iter "mo:base/Iter";
 import Debug "mo:base/Debug";
 
@@ -65,26 +65,39 @@ actor LoanBroker {
     type CreditCheck = actor {
         addRequest : (CreditRequest) -> ();
         getName : query () -> async ?Text;        
-    };    
+    };  
+
+    type Offers<LoanOffer> = Buffer.Buffer<LoanOffer>;  
+    type Applications<LoanApplication> = Buffer.Buffer<LoanApplication>;  
 
     let eq: (Nat, Nat) -> Bool = func(x, y) { x == y };
 
     let providers = Map.HashMap<Principal, LoanProvider>(0, Principal.equal, Principal.hash);
-    let applications = Map.HashMap<Principal, [LoanApplication]>(0, Principal.equal, Principal.hash);
+    let applications = Map.HashMap<Principal, Applications<LoanApplication>>(0, Principal.equal, Principal.hash);
     let openApplications = Map.HashMap<Nat, LoanApplication>(0, eq, Hash.hash);
     let pendingApplications = Map.HashMap<Nat, Principal>(0, eq, Hash.hash);
-    let offers = Map.HashMap<Principal, [LoanOffer]>(0, Principal.equal, Principal.hash);
+    let offers = Map.HashMap<Principal, Offers<LoanOffer>>(0, Principal.equal, Principal.hash);
 
     stable var counter : Nat = 0;  
 
     var creditProvider : ?CreditCheck = null;
 
     public shared query (msg) func getApplications() : async [LoanApplication] {
-        return Option.get<[LoanApplication]>(applications.get(msg.caller),[]);
+        var userApplications : ?Applications<LoanApplication> = applications.get(msg.caller);
+
+        switch userApplications {
+            case (null) { return [] };
+            case (?userApplication) { return userApplication.toArray() };
+        };
     }; 
 
     public shared query (msg) func getOffers() : async [LoanOffer] {
-        return Option.get<[LoanOffer]>(offers.get(msg.caller),[])
+        var userOffers :  ?Offers<LoanOffer> = offers.get(msg.caller);
+
+        switch userOffers {
+            case (null) { return [] };
+            case (?userOffer) { return userOffer.toArray() };
+        };
     };    
 
     public shared (msg) func apply(input : LoanApplication) : async Nat {
@@ -103,9 +116,12 @@ actor LoanBroker {
         created = Time.now();
         };
 
-        var userApplications : [LoanApplication] = Option.get<[LoanApplication]>(applications.get(msg.caller),[]);
-        userApplications := Array.append(userApplications, [application]);
-        applications.put(msg.caller, userApplications);
+        var userApplications :  ?Applications<LoanApplication> = applications.get(msg.caller);
+
+        switch userApplications {
+            case (null) { var userApplication: Applications<LoanApplication> = Buffer.Buffer(0); userApplication.add(application);  applications.put(msg.caller, userApplication)};
+            case (?userApplication) { userApplication.add(application); };
+        };
         
         openApplications.put(counter, application);
         
@@ -140,9 +156,9 @@ actor LoanBroker {
     public func setCredit(providerId : Principal, credit : Credit) {
         Debug.print("Credit for user " #Principal.toText(credit.userid));
 
-        var userApplications : [LoanApplication] = Option.get<[LoanApplication]>(applications.get(credit.userid),[]);
+        var userApplications : Applications<LoanApplication> = Option.get(applications.get(credit.userid), Buffer.Buffer<LoanApplication>(0));
 
-        for(application in Iter.fromArray<LoanApplication>(userApplications))
+        for(application in Iter.fromArray<LoanApplication>(userApplications.toArray()))
         {
             if (openApplications.get(application.id) != null) 
             {
@@ -171,12 +187,15 @@ actor LoanBroker {
         switch (pendingApplications.get(offer.applicationid)) {
             case null {Debug.print("Cannot Find Application ");};
             case (?userId) { 
-            Debug.print("Loan Offer for user " #Principal.toText(userId));
+                Debug.print("Loan Offer for user " #Principal.toText(userId));
 
-            var userOffers : [LoanOffer] = Option.get<[LoanOffer]>(offers.get(userId),[]);
-            userOffers := Array.append(userOffers, [offer]);
-            offers.put(userId, userOffers);
-                };
-        };     
+                var userOffers :  ?Offers<LoanOffer> = offers.get(userId);
+
+                switch userOffers {
+                    case (null) { var userOffer: Offers<LoanOffer> = Buffer.Buffer(0); userOffer.add(offer);  offers.put(userId, userOffer)};
+                    case (?userOffer) { userOffer.add(offer); };
+                }; 
+            }; 
+        };  
     };        
 };
