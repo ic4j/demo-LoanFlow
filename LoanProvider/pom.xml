@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.ic4j</groupId>
 	<artifactId>LoanProvider</artifactId>
-	<version>0.6.5</version>
+	<version>0.6.6</version>
 	<name>LoanProvider</name>
 	<description>Demo project for IC4J Agent</description>
 	<properties>
@@ -22,7 +22,7 @@
         <version.plugin.dependency>3.0.0</version.plugin.dependency>
         <version.plugin.jar>3.0.2</version.plugin.jar>
         <version.plugin.resources>2.7</version.plugin.resources>
-		<ic4j.agent.version>0.6.5</ic4j.agent.version>
+		<ic4j.agent.version>0.6.6</ic4j.agent.version>
 	</properties>
 	<dependencies>
 		<dependency>
