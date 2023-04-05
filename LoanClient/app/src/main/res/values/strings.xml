@@ -8,8 +8,8 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="ic.location">http://10.0.2.2:8000</string>
-    <string name="ic.canister">ryjl3-tyaaa-aaaaa-aaaba-cai</string>
+    <string name="ic.location">http://10.0.2.2:4943</string>
+    <string name="ic.canister">si2b5-pyaaa-aaaaa-aaaja-cai</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

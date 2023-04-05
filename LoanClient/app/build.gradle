@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "org.ic4j.demos.loanflow.loanclient"
         minSdk 27
-        targetSdk 31
+        targetSdk 33
         versionCode 1
-        versionName "0.6.8"
+        versionName "0.6.19"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,26 +28,27 @@ android {
     buildFeatures {
         viewBinding true
     }
+    buildToolsVersion '33.0.0'
 }
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.navigation:navigation-fragment:2.4.1'
-    implementation 'androidx.navigation:navigation-ui:2.4.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'commons-codec:commons-codec:1.15'
-    implementation 'org.ic4j:ic4j-candid:0.6.8'
+    implementation 'org.ic4j:ic4j-candid:0.6.19'
     // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
     implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
     // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on
     implementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
-    implementation('org.ic4j:ic4j-agent:0.6.8') {
+    implementation('org.ic4j:ic4j-agent:0.6.19.1') {
         exclude group: 'org.apache.httpcomponents.client5', module: 'httpclient5'
     }
-    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-api:2.0.6'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

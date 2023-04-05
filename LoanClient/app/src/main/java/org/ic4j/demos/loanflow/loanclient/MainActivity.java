@@ -1,29 +1,23 @@
 package org.ic4j.demos.loanflow.loanclient;
 
-import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.IBinder;
 import android.view.LayoutInflater;
-import android.view.View;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import org.ic4j.demos.loanflow.loanclient.databinding.ActivityMainBinding;
 import org.slf4j.Logger;

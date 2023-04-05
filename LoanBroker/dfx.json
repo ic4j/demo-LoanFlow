@@ -15,33 +15,6 @@
     "UnitedLoan": {
       "main": "src/LoanProvider/main.mo",
       "type": "motoko"
-    },         
-    "LoanBroker_assets": {
-      "dependencies": [
-        "LoanBroker"
-      ],
-      "frontend": {
-        "entrypoint": "src/LoanBroker_assets/src/index.html"
-      },
-      "source": [
-        "src/LoanBroker_assets/assets",
-        "dist/LoanBroker_assets/"
-      ],
-      "type": "assets"
     }
-  },
-  "defaults": {
-    "build": {
-      "args": "",
-      "packtool": ""
-    }
-  },
-  "dfx": "0.9.3",
-  "networks": {
-    "local": {
-      "bind": "127.0.0.1:8000",
-      "type": "ephemeral"
-    }
-  },
-  "version": 1
+  }
 }

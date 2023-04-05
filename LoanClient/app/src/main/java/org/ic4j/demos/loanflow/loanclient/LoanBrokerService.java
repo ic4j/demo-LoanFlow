@@ -8,7 +8,6 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.ic4j.agent.Agent;
 import org.ic4j.agent.AgentBuilder;
 import org.ic4j.agent.ProxyBuilder;

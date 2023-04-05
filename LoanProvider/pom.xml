@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.ic4j</groupId>
 	<artifactId>LoanProvider</artifactId>
-	<version>0.6.8</version>
+	<version>0.6.19</version>
 	<name>LoanProvider</name>
 	<description>Demo project for IC4J Agent</description>
 	<properties>
@@ -25,6 +25,12 @@
 		<ic4j.agent.version>0.6.8</ic4j.agent.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
@@ -44,12 +50,12 @@
 		<dependency>
 			<groupId>org.ic4j</groupId>
 			<artifactId>ic4j-agent</artifactId>
-			<version>${ic4j.agent.version}</version>
+			<version>0.6.19.1</version>
 		  </dependency>
 		  <dependency>
 			<groupId>org.ic4j</groupId>
 			<artifactId>ic4j-candid</artifactId>
-			<version>${ic4j.agent.version}</version>
+			<version>0.6.19</version>
 		  </dependency>		
 	</dependencies>
 

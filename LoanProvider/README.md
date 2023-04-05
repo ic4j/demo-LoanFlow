@@ -6,7 +6,7 @@ This application requires Java version 11.
 Modify [application.properties](src/main/resources/application.properties) file to set canister location and id.
 
 ```
-ic.location=http://127.0.0.1:8000
+ic.location=http://127.0.0.1:4943
 ic.canister=rno2w-sqaaa-aaaaa-aaacq-cai
 ```
 Build Angular client in angularclient directory.
@@ -31,7 +31,7 @@ mvn package
 Run Java with fat jar
 
 ```
-java -jar target/LoanProvider-0.6.8.jar
+java -jar target/LoanProvider-0.6.19.jar
 ```
 
 In Web Browser open URL [http://locahost:8080](http://locahost:8080)
