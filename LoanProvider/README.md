@@ -31,7 +31,7 @@ mvn package
 Run Java with fat jar
 
 ```
-java -jar target/LoanProvider-0.6.19.jar
+java -jar target/LoanProvider-0.7.0.jar
 ```
 
 In Web Browser open URL [http://locahost:8080](http://locahost:8080)

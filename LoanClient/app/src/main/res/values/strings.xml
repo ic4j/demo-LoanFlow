@@ -9,7 +9,8 @@
     <string name="previous">Previous</string>
 
     <string name="ic.location">http://10.0.2.2:4943</string>
-    <string name="ic.canister">si2b5-pyaaa-aaaaa-aaaja-cai</string>
+    <string name="ic.canister">bd3sg-teaaa-aaaaa-qaaba-cai</string>
+    <string name="ic.local">true</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

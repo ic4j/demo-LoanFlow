@@ -19,5 +19,5 @@ gradle build
 Run Java with fat jar
 
 ```
-java -jar build/libs/ic4j-demo-creditcheck-0.6.19.jar
+java -jar build/libs/ic4j-demo-creditcheck-0.7.0.jar
 ```

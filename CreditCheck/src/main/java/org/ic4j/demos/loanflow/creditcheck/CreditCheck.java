@@ -64,10 +64,20 @@ public class CreditCheck {
 
 			String icLocation = env.getProperty("ic.location");
 			String icCanister = env.getProperty("ic.canister");
+
+			boolean isLocal = true;
+
+			try {
+				isLocal = Boolean.parseBoolean(env.getProperty("ic.local"));
+			} catch (Exception e) {
+			}
 	
 			ReplicaTransport transport = ReplicaApacheHttpTransport.create(icLocation);
 			Agent agent = new AgentBuilder().transport(transport).build();
 
+			if(isLocal)
+				agent.fetchRootKey();
+			
 			CreditService creditService =  ProxyBuilder.create(agent,Principal.fromString(icCanister)).getProxy(CreditService.class);	
 			
 			CreditRequest[] requests = creditService.getRequests();

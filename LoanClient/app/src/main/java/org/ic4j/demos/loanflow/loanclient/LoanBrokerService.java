@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import org.ic4j.agent.Agent;
 import org.ic4j.agent.AgentBuilder;
+import org.ic4j.agent.AgentError;
 import org.ic4j.agent.ProxyBuilder;
 import org.ic4j.agent.ReplicaTransport;
 import org.ic4j.agent.http.ReplicaOkHttpTransport;
@@ -59,6 +60,14 @@ public class LoanBrokerService extends Service {
                 String icLocation = getString(R.string.ic_location);
                 String icCanister = getString(R.string.ic_canister);
 
+                boolean isLocal = true;
+
+                try {
+                    isLocal = Boolean.parseBoolean(getString(R.string.ic_local));
+                } catch (Exception e) {
+                }
+                isLocal =   Boolean.parseBoolean(getString(R.string.ic_local));
+
                 Resources res = getResources();
 
                 Security.removeProvider("BC");
@@ -70,8 +79,14 @@ public class LoanBrokerService extends Service {
                     ReplicaTransport transport = ReplicaOkHttpTransport.create(icLocation);
 
                     Agent agent = new AgentBuilder().transport(transport).identity(identity).build();
+
+                    if(isLocal)
+                        agent.fetchRootKey();
+
                     loanBroker = ProxyBuilder.create(agent, Principal.fromString(icCanister)).getProxy(LoanBroker.class);
                 }catch (URISyntaxException e) {
+                    LOG.error(e.getLocalizedMessage(),e);
+                }catch(AgentError e) {
                     LOG.error(e.getLocalizedMessage(),e);
                 }
             }

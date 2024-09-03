@@ -63,14 +63,14 @@
 
     <Spinner
         android:id="@+id/term"
-        android:inputType="number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="235dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:entries="@array/term"
-        android:hint="@string/term"/>
+        android:hint="@string/term"
+        android:inputType="number" />
 
     </LinearLayout>
