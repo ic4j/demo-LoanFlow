@@ -4,13 +4,13 @@ import Option "mo:base/Option";
 import Time "mo:base/Time";
 import LoanBroker "canister:LoanBroker";
 
-actor class LoanProvider() = this {
-    var name : ?Text = null;
+persistent actor class LoanProvider() = this {
+    transient var name : ?Text = null;
     type LoanOfferRequest = LoanBroker.LoanOfferRequest;
     type LoanOffer = LoanBroker.LoanOffer;
 
-    var requests : Buffer.Buffer<LoanOfferRequest> = Buffer.Buffer(0);
-    var offers : Buffer.Buffer<LoanOffer> = Buffer.Buffer(0);
+    transient var requests : Buffer.Buffer<LoanOfferRequest> = Buffer.Buffer(0);
+    transient var offers : Buffer.Buffer<LoanOffer> = Buffer.Buffer(0);
 
     public shared (msg) func init(input : Text) {
         name := Option.make(input);

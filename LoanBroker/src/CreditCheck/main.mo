@@ -5,12 +5,12 @@ import Map "mo:base/HashMap";
 import Iter "mo:base/Iter";
 import LoanBroker "canister:LoanBroker";
 
-actor class CreditCheck() = this {
-    var name : ?Text = null;
+persistent actor class CreditCheck() = this {
+    transient var name : ?Text = null;
     type CreditRequest = LoanBroker.CreditRequest;
     type Credit = LoanBroker.Credit;
 
-    let requests = Map.HashMap<Principal, LoanBroker.CreditRequest>(0, Principal.equal, Principal.hash);
+    transient let requests = Map.HashMap<Principal, LoanBroker.CreditRequest>(0, Principal.equal, Principal.hash);
 
     public shared (msg) func init(input : Text) {
         name := Option.make(input);

@@ -8,7 +8,7 @@ import Hash "mo:base/Hash";
 import Iter "mo:base/Iter";
 import Debug "mo:base/Debug";
 
-actor LoanBroker {
+persistent actor LoanBroker {
       // Loan Application
   public type LoanApplication = {
     id: Nat;
@@ -40,6 +40,7 @@ actor LoanBroker {
 
    // Loan Offer Request
   public type LoanOfferRequest = {
+    userid: Principal;
     applicationid: Nat;
     amount: Float;
     term: Nat16;   
@@ -70,17 +71,17 @@ actor LoanBroker {
     type Offers<LoanOffer> = Buffer.Buffer<LoanOffer>;  
     type Applications<LoanApplication> = Buffer.Buffer<LoanApplication>;  
 
-    let eq: (Nat, Nat) -> Bool = func(x, y) { x == y };
+    transient let eq: (Nat, Nat) -> Bool = func(x, y) { x == y };
 
-    let providers = Map.HashMap<Principal, LoanProvider>(0, Principal.equal, Principal.hash);
-    let applications = Map.HashMap<Principal, Applications<LoanApplication>>(0, Principal.equal, Principal.hash);
-    let openApplications = Map.HashMap<Nat, LoanApplication>(0, eq, Hash.hash);
-    let pendingApplications = Map.HashMap<Nat, Principal>(0, eq, Hash.hash);
-    let offers = Map.HashMap<Principal, Offers<LoanOffer>>(0, Principal.equal, Principal.hash);
+    transient let providers = Map.HashMap<Principal, LoanProvider>(0, Principal.equal, Principal.hash);
+    transient let applications = Map.HashMap<Principal, Applications<LoanApplication>>(0, Principal.equal, Principal.hash);
+    transient let openApplications = Map.HashMap<Nat, LoanApplication>(0, eq, Hash.hash);
+    transient let pendingApplications = Map.HashMap<Nat, Principal>(0, eq, Hash.hash);
+    transient let offers = Map.HashMap<Principal, Offers<LoanOffer>>(0, Principal.equal, Principal.hash);
 
     stable var counter : Nat = 0;  
 
-    var creditProvider : ?CreditCheck = null;
+    transient var creditProvider : ?CreditCheck = null;
 
     public shared query (msg) func getApplications() : async [LoanApplication] {
         var userApplications : ?Applications<LoanApplication> = applications.get(msg.caller);
